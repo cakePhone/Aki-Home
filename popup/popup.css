@@ -1,0 +1,128 @@
+@import url(../globals.css);
+
+html {
+  width: 30rem;
+  padding: 1rem;
+
+  color: rgb(var(--on-background));
+  background-color: rgba(var(--background));
+
+  resize: both;
+}
+
+body {
+  display: grid;
+  gap: 1rem;
+}
+
+a {
+  color: rgb(var(--accent));
+}
+
+input,
+select,
+button,
+.file-picker {
+  height: 2.5rem;
+  width: 10rem;
+
+  padding: 0.25rem;
+
+  background-color: rgb(var(--foreground));
+
+  outline: none;
+  border: none;
+  border-bottom: 2px solid rgb(var(--on-background));
+
+  font-size: 1rem;
+
+  color: rgb(var(--on-foreground));
+
+  border-radius: 0.25rem;
+
+  transition: 100ms;
+}
+
+.file-picker {
+  display: flex;
+  align-items: center;
+}
+
+input:focus,
+select:focus,
+button:focus,
+.file-picker:focus {
+  border-bottom: 2px solid rgb(var(--accent));
+}
+
+button {
+  width: 100%;
+}
+
+label,
+.settings-container {
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: space-between;
+}
+
+label div,
+.settings-container div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+label svg,
+.settings-container svg {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.hover-warning:hover {
+  border-bottom: 2px solid rgb(var(--warning));
+  background-color: rgba(var(--warning), 0.3);
+}
+
+#aki-title {
+  color: rgb(var(--accent));
+  text-shadow: 0 0 3px rgba(var(--accent), 0.5);
+}
+
+label[for="enable-wallpaper"] {
+  position: relative;
+
+  height: 1.5rem;
+  width: 2.5rem;
+
+  border-radius: 1rem;
+
+  background-color: rgb(var(--foreground));
+}
+
+label[for="enable-wallpaper"]::after {
+  content: "";
+
+  position: absolute;
+
+  top: calc(0.75rem / 2);
+  left: calc(0.75rem / 2);
+
+  height: 0.75rem;
+  width: 0.75rem;
+
+  border-radius: 1rem;
+
+  background-color: rgb(var(--on-foreground));
+
+  transition: 100ms;
+}
+
+label[for="enable-wallpaper"]:has(input[type="checkbox"]:checked) {
+  background-color: rgb(var(--accent));
+}
+
+label[for="enable-wallpaper"]:has(input[type="checkbox"]:checked)::after {
+  left: calc(2.5rem - 0.75rem - 0.75rem / 2);
+  background-color: rgb(var(--on-accent));
+}
