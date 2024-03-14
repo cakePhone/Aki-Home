@@ -1,5 +1,7 @@
 # Aki Home
 
+![Aki Home main page](gh-images/main-page.png)
+
 A better version of OreoSearchPage, now in extension form!
 
 Aki Home is a rework of [OreoSearchPage](https://cakephone.github.io/OreoSearchPage/) as a Chrome Extension (for now).
@@ -31,6 +33,12 @@ Aki (あき) is a Japanese name meaning "Clean", "Clear", "Simple", etc. Which i
 - `cd /path/to/extension/`
 
 - `git pull origin main`
+
+## Configuring
+
+The extension popup has all the settings you need! Just pin it for easier access!
+
+![Aki Popup Settings](gh-images/popup.png)
 
 # Roadmap
 
