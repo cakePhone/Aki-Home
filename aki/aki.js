@@ -74,7 +74,7 @@ function updatePage() {
           bookmarks[i].favicon,
           bookmarks[i].url,
           i,
-          calculateRowSize(bookmarks.length - 1)
+          calculateRowSize(bookmarks.length)
         );
       }
     })
@@ -94,7 +94,7 @@ function updatePage() {
 
 function setListeners() {
   search.addEventListener("keydown", (event) => {
-    if (event.keyCode === 13) {
+    if (event.code === "Enter") {
       event.preventDefault();
       goto(config, event.target.value);
     }
@@ -110,7 +110,9 @@ function setListeners() {
 function generateBookmark(name, icon, url, index, num) {
   let parser = new DOMParser();
 
-  const delay = Math.pow((index % num) - num / 2, 2) * 0.05;
+  const timeModifier = 0.05;
+
+  const delay = Math.pow((index % num) - (num - 1) / 2, 2) * timeModifier;
 
   const bookmarkHTMLString = `
     <a href="${url}" class="bookmark" style="animation-delay: ${delay}s">
