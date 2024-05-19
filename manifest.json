@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Aki Home",
   "description": "A simple home page aiming to stand out",
-  "version": "1.0",
+  "version": "1.1",
   "icons": {
     "16": "assets/aki16.png",
     "48": "assets/aki48.png",
@@ -11,7 +11,7 @@
   },
   "action": {
     "default_title": "Aki Home",
-    "default_popup": "popup/popup.html",
+    "default_popup": "sidebar/sidebar.html",
     "default_icon": {
       "16": "assets/aki16.png",
       "48": "assets/aki48.png",
@@ -19,7 +19,29 @@
       "256": "assets/aki256.png"
     }
   },
-  "permissions": ["tabs", "bookmarks"],
+
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/"],
+      "js": ["background/content.js"]
+    }
+  ],
+
+  "side_panel": {
+    "default_path": "sidebar/sidebar.html"
+  },
+
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "sidePanel",
+    "storage",
+    "unlimitedStorage"
+  ],
   "chrome_url_overrides": {
     "newtab": "aki/aki.html"
   }

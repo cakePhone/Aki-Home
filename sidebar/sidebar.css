@@ -1,7 +1,6 @@
 @import url(../globals.css);
 
 html {
-  width: 30rem;
   padding: 1rem;
 
   color: rgb(var(--on-background));
@@ -24,7 +23,7 @@ select,
 button,
 .file-picker {
   height: 2.5rem;
-  width: 10rem;
+  width: 8rem;
 
   padding: 0.25rem;
 
@@ -89,7 +88,7 @@ label svg,
   text-shadow: 0 0 3px rgba(var(--accent), 0.5);
 }
 
-label[for="enable-wallpaper"] {
+label.switch {
   position: relative;
 
   height: 1.5rem;
@@ -100,7 +99,7 @@ label[for="enable-wallpaper"] {
   background-color: rgb(var(--foreground));
 }
 
-label[for="enable-wallpaper"]::after {
+label.switch::after {
   content: "";
 
   position: absolute;
@@ -118,11 +117,11 @@ label[for="enable-wallpaper"]::after {
   transition: 100ms;
 }
 
-label[for="enable-wallpaper"]:has(input[type="checkbox"]:checked) {
+label.switch:has(input[type="checkbox"]:checked) {
   background-color: rgb(var(--accent));
 }
 
-label[for="enable-wallpaper"]:has(input[type="checkbox"]:checked)::after {
+label.switch:has(input[type="checkbox"]:checked)::after {
   left: calc(2.5rem - 0.75rem - 0.75rem / 2);
   background-color: rgb(var(--on-accent));
 }

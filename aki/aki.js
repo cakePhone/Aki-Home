@@ -6,8 +6,6 @@ import {
   setStyles,
 } from "../lib/commons.js";
 
-let config = getStorage();
-
 /**
  * @type {HTMLImageElement}
  */
@@ -29,7 +27,7 @@ let bookmark_container;
  * Generates the appropiate greeting for the time of day
  * @returns {string} Greeting shown in the page
  */
-function setGreeting() {
+function setGreeting(config) {
   const hour = new Date().getHours();
   let timeOfDayString;
   if (hour < 7 || hour > 19) {
@@ -62,37 +60,43 @@ function calculateRowSize(bookmarkNum) {
 /**
  * Updates the page with data from the extesion
  */
-function updatePage() {
+function updatePage(config, makeBookmarks) {
   setStyles(config);
 
-  getBookmarks()
-    .then((bookmarks) => {
-      bookmarks.slice(0, 8);
-      for (let i = 0; i < bookmarks.length; i++) {
-        generateBookmark(
-          bookmarks[i].title,
-          bookmarks[i].favicon,
-          bookmarks[i].url,
-          i,
-          calculateRowSize(bookmarks.length)
-        );
-      }
-    })
-    .catch((error) => {
-      console.error("Error retrieving bookmarks:", error);
-    });
+  if (makeBookmarks) {
+    getBookmarks()
+      .then((bookmarks) => {
+        bookmarks.slice(0, 8);
+        for (let i = 0; i < bookmarks.length; i++) {
+          generateBookmark(
+            bookmarks[i].title,
+            bookmarks[i].favicon,
+            bookmarks[i].url,
+            i,
+            calculateRowSize(bookmarks.length)
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error retrieving bookmarks:", error);
+      });
+  }
 
-  if (config.style.wallpaper.enabled && config.style.wallpaper.url) {
-    wallpaper.src = config.style.wallpaper.url;
+  if (
+    config.style[config.currentActiveStyle].wallpaper.enabled &&
+    config.style[config.currentActiveStyle].wallpaper.url
+  ) {
+    wallpaper.src = config.style[config.currentActiveStyle].wallpaper.url;
+    wallpaper.style.display = "block";
   } else {
     wallpaper.style.display = "none";
   }
 
-  greeting.innerText = setGreeting();
+  greeting.innerText = setGreeting(config);
   search.placeholder = "Search with " + searchEngines[config.searchEngine].name;
 }
 
-function setListeners() {
+function setListeners(config) {
   search.addEventListener("keydown", (event) => {
     if (event.code === "Enter") {
       event.preventDefault();
@@ -131,15 +135,26 @@ function generateBookmark(name, icon, url, index, num) {
 /**
  * Initialise Page
  */
-function init() {
+async function init() {
   wallpaper = document.getElementById("wallpaper");
   greeting = document.getElementById("greeting");
   search = document.getElementById("search");
   bookmark_container = document.getElementById("bookmark-container");
 
-  updatePage();
-  setListeners();
-  getBookmarks();
+  let config = await getStorage();
+
+  updatePage(config, true);
+  setListeners(config);
+  getBookmarks(config);
+
+  chrome.runtime.onMessage.addListener(
+    async (message, sender, sendResponse) => {
+      if (message.action === "refresh") {
+        config = await getStorage();
+        updatePage(config, false);
+      }
+    }
+  );
 
   console.log("Init");
 }

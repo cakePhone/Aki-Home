@@ -6,6 +6,8 @@ body {
 }
 
 #wallpaper {
+  display: none;
+
   height: 100vh;
   width: 100vw;
 
@@ -54,8 +56,6 @@ h1 {
   color: rgb(var(--on-foreground));
   background-color: rgb(var(--foreground));
 
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
-
   animation: scale-in 500ms ease-out forwards;
 }
 
@@ -101,7 +101,7 @@ input::placeholder {
   color: rgb(var(--on-background));
 
   text-decoration: none;
-  text-shadow: 0 2px 0 black;
+  text-shadow: 0 1px 0 rgba(var(--on-background), .5);
 
   opacity: 0;
   animation: fade-pop-in 400ms ease-in-out forwards;

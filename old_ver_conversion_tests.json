@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "nickname": "Miguel",
+  "searchEngine": 0,
+  "style": {
+    "accent": [200, 92, 235],
+    "foreground": [62, 20, 62],
+    "background": [33, 140, 33],
+    "wallpaper": { "url": "", "enabled": false }
+  },
+  "bookmarks": []
+}
