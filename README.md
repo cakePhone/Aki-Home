@@ -34,15 +34,51 @@ Aki (あき) is a Japanese name meaning "Clean", "Clear", "Simple", etc. Which i
 
 - `git pull origin main`
 
+## Migrating your data from previous versions
+
+The extension has got you covered, but make sure that you make a backup of it if you're comming from V1.0
+
+### How to backup
+
+- Open the popup/side panel
+
+- Right click it
+
+- Inspect
+
+- Application
+
+- Local Storage
+
+- Copy the contents of the entry named `config`
+
+- Save it somewhere where you'll remember
+
 ## Configuring
 
-The extension popup has all the settings you need! Just pin it for easier access!
+Click on the extension icon and the Side Panel will open for all the configuration you need!
 
-![Aki Popup Settings](gh-images/popup.png)
+![Aki SidePanel Settings (Light Mode)](gh-images/sidepanel.png) ![Aki SidePanel Settings (Dark Mode)](gh-images/sidepanel-dark.png)
+
+All changes will be immediatelly reflected onto the page and Side Panel!
+
+### Heads up! There's different themes!
+
+Toggling Dark Mode will now show the configuration for it. Make sure you're editing the theme you ACTUALLY want to change by toggling it.
+
+Different themes have independant:
+
+- Theme colors
+
+- Wallpaper
+
+- Wallpaper toggle
 
 # Roadmap
 
+- [ ] Tint text
 - [ ] Firefox Support
 - [ ] Custom CSS
 - [ ] Custom Animation Equation
-- [ ] Auto Update Page and Popup
+- [ ] Export/Import config tool
+- [x] ~~Auto Update Page and Popup~~
