@@ -32,17 +32,17 @@ export function displayStoredValues(config) {
   accent.value = rgbToHex(
     config.style[config.currentActiveStyle].accent[0],
     config.style[config.currentActiveStyle].accent[1],
-    config.style[config.currentActiveStyle].accent[2]
+    config.style[config.currentActiveStyle].accent[2],
   );
   foreground.value = rgbToHex(
     config.style[config.currentActiveStyle].foreground[0],
     config.style[config.currentActiveStyle].foreground[1],
-    config.style[config.currentActiveStyle].foreground[2]
+    config.style[config.currentActiveStyle].foreground[2],
   );
   background.value = rgbToHex(
     config.style[config.currentActiveStyle].background[0],
     config.style[config.currentActiveStyle].background[1],
-    config.style[config.currentActiveStyle].background[2]
+    config.style[config.currentActiveStyle].background[2],
   );
   wp_enabled.checked =
     config.style[config.currentActiveStyle].wallpaper.enabled;
@@ -82,7 +82,7 @@ function setListeners(config) {
   accent.addEventListener("change", async (event) => {
     config = await getStorage();
     config.style[config.currentActiveStyle].accent = hexToRgb(
-      event.target.value
+      event.target.value,
     );
     await updateConfig(config);
   });
@@ -90,7 +90,7 @@ function setListeners(config) {
   foreground.addEventListener("change", async (event) => {
     config = await getStorage();
     config.style[config.currentActiveStyle].foreground = hexToRgb(
-      event.target.value
+      event.target.value,
     );
     await updateConfig(config);
   });
@@ -98,15 +98,16 @@ function setListeners(config) {
   background.addEventListener("change", async (event) => {
     config = await getStorage();
     config.style[config.currentActiveStyle].background = hexToRgb(
-      event.target.value
+      event.target.value,
     );
     await updateConfig(config);
   });
 
   wallpaper.addEventListener("change", async (event) => {
     config = await getStorage();
-    config.style[config.currentActiveStyle].wallpaper.url =
-      await updateWallpaper(event.target.files[0]);
+    config.style[config.currentActiveStyle].wallpaper.url = updateWallpaper(
+      event.target.files[0],
+    );
     await updateConfig(config);
   });
 
