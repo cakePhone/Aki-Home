@@ -33,19 +33,25 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-setInterval(async () => {
-  const config = (await chrome.storage.local.get("config")).config;
+chrome.alarms.create("checkDarkMode", { periodInMinutes: 1 });
 
-  let hour = new Date().getHours();
-  if (hour > 8 && hour < 20) {
-    config.currentActiveStyle = 0;
-  } else {
-    config.currentActiveStyle = 1;
-  }
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === "checkDarkMode") {
+    chrome.storage.local.get("config", (result) => {
+      const config = result.config || {};
 
-  chrome.storage.local.set({ config }, () => {
-    chrome.storage.local.get("config", (config) => {
-      console.log(config.config);
+      let hour = new Date().getHours();
+      if (hour > 8 && hour < 20) {
+        config.currentActiveStyle = 0;
+      } else {
+        config.currentActiveStyle = 1;
+      }
+
+      chrome.storage.local.set({ config }, () => {
+        chrome.storage.local.get("config", (newConfigResult) => {
+          console.log(newConfigResult.config);
+        });
+      });
     });
-  });
-}, 60000);
+  }
+});

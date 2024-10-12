@@ -39,7 +39,8 @@
     "bookmarks",
     "sidePanel",
     "storage",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "alarms"
   ],
   "chrome_url_overrides": {
     "newtab": "aki/aki.html"
